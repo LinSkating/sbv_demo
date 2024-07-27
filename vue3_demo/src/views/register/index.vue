@@ -3,6 +3,7 @@ import {reactive} from "vue";
 import axios from "axios";
 import {ElMessage} from "element-plus";
 import {useRouter} from "vue-router";
+import {Female, Male} from "@element-plus/icons-vue";
 
 const router = useRouter();
 
@@ -82,8 +83,8 @@ async function registerHandle(formRef) {
 
         <el-form-item label="性别" prop="gender">
           <el-radio-group v-model="user.gender">
-            <el-radio value="Boy">Boy</el-radio>
-            <el-radio value="Girl">Girl</el-radio>
+            <el-radio value="Boy">Boy <el-icon><Male /></el-icon> </el-radio>
+            <el-radio value="Girl">Girl <el-icon><Female /></el-icon> </el-radio>
           </el-radio-group>
         </el-form-item>
 

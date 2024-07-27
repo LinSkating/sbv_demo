@@ -34,14 +34,25 @@ import {Bell, Help, Share, Star, User, UserFilled} from "@element-plus/icons-vue
       </button>
     </div>
 
-    <div class="hover">
-      <button class="button">
-        <el-icon :size="25" class="el-icon">
-          <Help />
-        </el-icon>
-        <span class="font">帮助</span>
-      </button>
-    </div>
+    <el-popover>
+      <template #reference>
+        <div class="hover">
+          <button class="button">
+            <el-icon :size="25" class="el-icon">
+              <Help />
+            </el-icon>
+            <span class="font">帮助</span>
+          </button>
+        </div>
+      </template>
+      <template #default>
+        <div>
+          <!-- 在用该组件时，src中路径用‘ ’包裹，再用“ ”包裹整个路径 -->
+          <el-image :src=" '/myWeChat.jpg' "></el-image>
+        </div>
+      </template>
+    </el-popover>
+
 
     <div class="hover">
       <button class="button">
