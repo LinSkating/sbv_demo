@@ -28,10 +28,6 @@ async function clickHandle() {
   }
 }
 
-function register() {
-  router.push('/register')
-}
-
 </script>
 
 <template>
@@ -41,27 +37,43 @@ function register() {
       <div class="flex gap" style="align-items: center">
         <div class="toWide">UserName:</div>
         <div>
-          <el-input v-model="user.username" clearable placeholder="请输入用户名"
-                    style="width: 300px; margin-right: 6px"></el-input>
+          <el-input
+              v-model="user.username"
+              clearable placeholder="请输入用户名"
+              style="width: 300px; margin-right: 6px"
+          >
+          </el-input>
         </div>
       </div>
 
       <div class="flex gap" style="align-items: center">
         <div class="toWide">Password:</div>
         <div>
-          <el-input v-model="user.password" show-password placeholder="请输入密码" style="width: 300px"></el-input>
+          <el-input
+              v-model="user.password"
+              show-password placeholder="请输入密码"
+              style="width: 300px"
+          >
+          </el-input>
         </div>
       </div>
 
       <div class="flex">
         <div class="flex" style="margin-right: 50px">
-          <el-button type="primary" link @click="register">注册</el-button>
+          <el-button type="primary" link @click="router.push('/register')">注册</el-button>
         </div>
         <div class="flex">
-          <el-button type="primary" round style="width: 200px" @click="clickHandle">Submit</el-button>
+          <el-button
+              type="primary"
+              round
+              style="width: 200px"
+              @click="clickHandle"
+          >
+            Submit
+          </el-button>
         </div>
         <div class="flex" style="margin-left: 30px">
-          <el-button type="info" link>忘记密码</el-button>
+          <el-button type="info" link @click="router.push('/forgetPassword/stepOne')">忘记密码</el-button>
         </div>
       </div>
     </div>

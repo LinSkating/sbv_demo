@@ -4,6 +4,10 @@ import Home from '@/views/home/index.vue'
 import Register from '@/views/register/index.vue'
 import Me from '@/views/home/aboutMe/lifeSpeech.vue'
 import Picture from '@/views/home/aboutMe/favoritePicture.vue'
+import ForgetPassword from '@/views/forgetPassword/index.vue'
+import stepOne from '@/views/forgetPassword/step/step1.vue'
+import stepTwo from '@/views/forgetPassword/step/step2.vue'
+import stepThree from '@/views/forgetPassword/step/step3.vue'
 
 const routes = [
     {
@@ -34,6 +38,24 @@ const routes = [
         path: '/register',
         component: Register
     },
+    {
+        path: '/forgetPassword',
+        component: ForgetPassword,
+        children: [
+            {
+                path: 'stepOne',
+                component: stepOne
+            },
+            {
+                path: 'stepTwo',
+                component: stepTwo
+            },
+            {
+                path: 'stepThree',
+                component: stepThree
+            }
+        ]
+    }
 ]
 
 const router = createRouter({
