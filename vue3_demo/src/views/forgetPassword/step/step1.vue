@@ -5,16 +5,19 @@ import {Avatar, Back, Right} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
 import router from "@/router/index.js";
 import {successStep} from "@/stores/successStep.js";
+import {tempUserName} from "@/stores/tempUserName.js"
 
 const username = ref('')
 // 使用pinia时对于仓库暴露出来的名要加() eg：successStep()
 const curStep = successStep()
+const tempName = tempUserName()
 
 function next() {
   if (username.value === '') {
     ElMessage.error('请输入用户名')
   } else {
     curStep.next()
+    tempName.setUserName(username.value)
     router.push('/forgetPassword/stepTwo')
   }
 }
@@ -46,7 +49,7 @@ function next() {
       </div>
 
       <div>
-        <el-button type="success" round :icon="Right" @click="next">继续</el-button>
+        <el-button type="success" round :icon="Right" @click="next" color="#FFC0CB">继续</el-button>
       </div>
     </div>
   </div>

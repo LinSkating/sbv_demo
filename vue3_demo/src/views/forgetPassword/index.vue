@@ -13,7 +13,7 @@ const curStep = successStep()
     <div style="display: flex; width: 60%; margin-top: 30px; justify-content: center">
       <div style="width: 500px;">
         <el-steps
-            style="max-width: 600px"
+            style="max-width: 600px;margin-left: 100px"
             :space="200"
             :active="curStep.step"
             finish-status="success"
@@ -39,6 +39,6 @@ const curStep = successStep()
   flex-direction: column;
   align-items: center;
   height: 98vh;
-  background-color: pink;
+  background-image: linear-gradient(to right, #ADD8E6 0%, #FFC0CB 100%);
 }
 </style>

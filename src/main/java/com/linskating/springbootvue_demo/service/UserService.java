@@ -28,4 +28,12 @@ public class UserService {
         }
         return findUser;
     }
+
+    public boolean resetPassword(String username, String password) {
+        if(userMapper.selectByName(username) == null) {
+            throw new ServiceException("账号不存在");
+        }
+        userMapper.setPassword(username,password);
+        return true;
+    }
 }

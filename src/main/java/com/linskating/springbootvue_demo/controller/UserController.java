@@ -31,4 +31,13 @@ public class UserController {
         }
         return Result.error("账号已存在");
     }
+
+    //忘记密码操作
+    @PostMapping("/forgetPassword")
+    public Result forgetPassword(@RequestBody User user) {
+        if(userService.resetPassword(user.getUsername(), user.getPassword())) {
+            return Result.success();
+        }
+        return Result.error("账号不存在");
+    }
 }

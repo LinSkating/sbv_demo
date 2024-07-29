@@ -2,14 +2,14 @@
 
 import {ref} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
+import {useRouter} from "vue-router";
+import {successStep} from "@/stores/successStep.js";
 
 const code = ref('点击获取验证码')
-const inputCode = ref('')
-
 function getCode() {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let res = ''
-  for(let i = 0; i < 8; i++) {
+  for (let i = 0; i < 8; i++) {
     const min = Math.ceil(0);
     const max = Math.floor(57);
     const ind = Math.floor(Math.random() * (max - min + 1)) + min
@@ -18,8 +18,11 @@ function getCode() {
   code.value = res
 }
 
+const inputCode = ref('')
+const router = useRouter()
+const curStep = successStep()
 function submit() {
-  if(code.value === inputCode.value) {
+  if (code.value === inputCode.value) {
     ElMessage.success('验证成功')
     ElMessageBox.alert(
         '<img src="/myWeChat.jpg" alt="sdv" style="width: 300px; height: 410px">' +
@@ -27,7 +30,10 @@ function submit() {
         {
           dangerouslyUseHTMLString: true,
         },
-    )
+    ).then(() => {
+      curStep.next()
+      router.push('/forgetPassword/stepThree')
+    })
   } else {
     ElMessage.error('验证码错误')
   }
@@ -42,11 +48,11 @@ function submit() {
         <el-input placeholder="请输入当前验证码" v-model="inputCode"></el-input>
       </div>
       <div style="margin-left: 100px">
-        <el-button @click="getCode"> {{code}} </el-button>
+        <el-button @click="getCode"> {{ code }}</el-button>
       </div>
     </div>
 
-    <div >
+    <div>
       <el-button
           style="width: 200px; margin-top: 50px"
           :round="true"
@@ -62,7 +68,7 @@ function submit() {
 </template>
 
 <style scoped>
-.mainBox{
+.mainBox {
   height: 500px;
   width: 60vw;
   display: flex;

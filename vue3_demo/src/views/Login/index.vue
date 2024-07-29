@@ -3,6 +3,7 @@ import {reactive} from "vue";
 import axios from 'axios';
 import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
+import {successStep} from "@/stores/successStep.js";
 
 const router = useRouter();
 const user = reactive({
@@ -28,11 +29,17 @@ async function clickHandle() {
   }
 }
 
+const curStep = successStep()
+function forgetPassword() {
+  curStep.reset()
+  router.push('/forgetPassword/stepOne')
+}
+
 </script>
 
 <template>
   <div class="changeColor bigBox">
-    <div class="flex exchangeMainAxis ">
+    <div class="flex exchangeMainAxis" style="background-color: rgba(255,255,255,0.1); width: 700px; height: 400px">
       <h1 style="margin-right: 20px">登录</h1>
       <div class="flex gap" style="align-items: center">
         <div class="toWide">UserName:</div>
@@ -73,7 +80,7 @@ async function clickHandle() {
           </el-button>
         </div>
         <div class="flex" style="margin-left: 30px">
-          <el-button type="info" link @click="router.push('/forgetPassword/stepOne')">忘记密码</el-button>
+          <el-button type="text" link @click="forgetPassword">忘记密码</el-button>
         </div>
       </div>
     </div>
@@ -105,7 +112,7 @@ async function clickHandle() {
 
 .changeColor {
   /* 设置渐变背景 */
-  background-image: linear-gradient(to bottom right, #FFAB91, #FFEA64);
+  background-image: linear-gradient(to right,  #AED6F1, #D7BDE2);
 
   /* 其他样式 */
   width: 100%;

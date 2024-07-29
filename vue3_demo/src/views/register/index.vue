@@ -133,7 +133,7 @@ async function registerHandle(formRef) {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: linear-gradient(135deg, #98FB98 0%, #FF7F50 100%);
+  background-image: linear-gradient(to right, #B5EAD7, #FFD1DC);
 }
 
 .smallBox{

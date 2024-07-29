@@ -6,6 +6,9 @@ export const successStep = defineStore('successStep',()=>{
     function next() {
         step.value++
     }
+    function reset() {
+        step.value = 0
+    }
     // 别忘了返回值和函数，给予暴露出去
-    return {step, next}
+    return {step, next, reset}
 })
