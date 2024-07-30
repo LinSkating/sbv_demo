@@ -13,23 +13,28 @@ const user = reactive({
 
 
 async function clickHandle() {
-  try {
-    const response = await axios.post('http://localhost:8080/user/Login', {
-      username: user.username,
-      password: user.password
-    });
-    if(response.data.code === '200') {
-      ElMessage.success('登录成功')
-      router.push('/home')
-    } else {
-      ElMessage.error('账号或密码错误')
+  if (user.username === '' || user.password === '') {
+    ElMessage.error('请输入用户名和密码')
+  } else {
+    try {
+      const response = await axios.post('http://localhost:8080/user/Login', {
+        username: user.username,
+        password: user.password
+      });
+      if (response.data.code === '200') {
+        ElMessage.success('登录成功')
+        router.push('/home')
+      } else {
+        ElMessage.error('账号或密码错误')
+      }
+    } catch (error) {
+      console.error(error)
     }
-  } catch (error) {
-    console.error(error)
   }
 }
 
 const curStep = successStep()
+
 function forgetPassword() {
   curStep.reset()
   router.push('/forgetPassword/stepOne')
@@ -112,12 +117,12 @@ function forgetPassword() {
 
 .changeColor {
   /* 设置渐变背景 */
-  background-image: linear-gradient(to right,  #AED6F1, #D7BDE2);
+  background-image: linear-gradient(to right, #AED6F1, #D7BDE2);
 
   /* 其他样式 */
   width: 100%;
   height: 100vh; /* 设置高度为视口的高度 */
-  margin: 0;    /* 清除外边距 */
+  margin: 0; /* 清除外边距 */
   padding: 0;
   display: flex;
   align-items: center;
