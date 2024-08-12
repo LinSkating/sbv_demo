@@ -13,7 +13,7 @@ function disappear() {
       :interval="2500"
       type="card"
       height="600px"
-      style="padding-left: 75px;"
+      style="padding-left: 75px; margin-top: 20px"
       :motion-blur="true"
       :cardScale="0.8"
   >

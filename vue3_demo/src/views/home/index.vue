@@ -13,7 +13,7 @@ import Aside from '@/views/home/aside/index.vue'
       <el-aside class="colorAside">
         <Aside></Aside>
       </el-aside>
-      <el-main>
+      <el-main style="padding: 0">
         <RouterView/>
       </el-main>
     </el-container>

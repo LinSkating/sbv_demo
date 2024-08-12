@@ -4,7 +4,9 @@ import axios from 'axios';
 import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
 import {successStep} from "@/stores/successStep.js";
+import {setUsername} from "@/stores/setUsername.js";
 
+const curUser = setUsername()
 const router = useRouter();
 const user = reactive({
   username: '',
@@ -23,6 +25,7 @@ async function clickHandle() {
       });
       if (response.data.code === '200') {
         ElMessage.success('登录成功')
+        curUser.setName(user.username)
         router.push('/home')
       } else {
         ElMessage.error('账号或密码错误')

@@ -1,5 +1,5 @@
 <script setup>
-import {Operation, Postcard} from "@element-plus/icons-vue";
+import {Operation, Postcard, Film} from "@element-plus/icons-vue";
 </script>
 
 <template>
@@ -23,10 +23,22 @@ import {Operation, Postcard} from "@element-plus/icons-vue";
           </template>
           <el-menu-item-group>
             <!-- 注意设置跳转路由时要写成完整二级路由的形式 -->
-            <el-menu-item index="/home/aboutMe">Life speech</el-menu-item>
-            <el-menu-item index="/home/favPicture">picture</el-menu-item>
+            <el-menu-item index="/home/aboutMe">人生格言</el-menu-item>
+            <el-menu-item index="/home/favPicture">图片</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
+
+        <el-sub-menu index="2">
+          <template #title>
+            <el-icon><Film /></el-icon>
+            <span>时空胶囊</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/home/timeTravel">时空穿梭</el-menu-item>
+            <el-menu-item index="/home/dropDriftBottle">投放漂流瓶</el-menu-item>
+          </el-menu-item-group>
+        </el-sub-menu>
+
       </el-menu>
     </el-col>
   </el-row>
