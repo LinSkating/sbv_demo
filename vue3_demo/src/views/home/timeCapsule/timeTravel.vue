@@ -6,12 +6,13 @@ import {setUsername} from "@/stores/setUsername.js";
 
 const content = ref([])
 const limit = ref(6)
-
+const curUser = setUsername()
 async function fetchTimeTravelContent() {
   try {
     const response = await axios.get('http://localhost:8080/home/timeTravel', {
       params: {
-        limit: limit.value
+        limit: limit.value,
+        reader: curUser.curUsername
       }
     })
     content.value = response.data
@@ -32,18 +33,19 @@ function getGradient(index) {
 }
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'
-const curUser = setUsername()
-
 async function handleLike(item) {
-  if (item.username !== curUser.curUsername) {
-    item.isLike = !item.isLike
+  if (item.author !== curUser.curUsername) {
+    item.likeStatus = !item.likeStatus
     try {
       await axios.put('http://localhost:8080/home/timeTravel/updateLikeStatus', {
         //请求体
         id: item.id,
-        isLike: item.isLike
+        reader: curUser.curUsername,
+        author: item.author,
+        works: item.sentence,
+        likeStatus: item.likeStatus
       })
-      if (item.isLike) {
+      if (item.likeStatus) {
         item.star++;
       } else {
         item.star--;
@@ -51,8 +53,8 @@ async function handleLike(item) {
     } catch (error) {
       console.error('Error updating like status:', error);
       // 如果发生错误，恢复原来的点赞状态
-      item.isLike = !item.isLike;
-      if (item.isLike) {
+      item.likeStatus = !item.likeStatus;
+      if (item.likeStatus) {
         item.star--;
       } else {
         item.star++;
@@ -67,14 +69,14 @@ async function handleLike(item) {
     <div class="boxSize" v-for="(item,index) in content" :key="item.id" :class="getGradient(index)"
          style="border-radius: 20px">
       <div style="margin-left: 20px">
-        <h4>作者：{{ item.username }}</h4>
+        <h4>作者：{{ item.author }}</h4>
       </div>
       <div style="display: flex; justify-content: center">
         <p>{{ item.sentence }}</p>
       </div>
       <div style="display: flex; justify-content: end">
         <div class="setMargin" @click="handleLike(item)">
-          <el-icon v-if="item.isLike">
+          <el-icon v-if="item.likeStatus">
             <StarFilled/>
           </el-icon>
           <el-icon v-else>

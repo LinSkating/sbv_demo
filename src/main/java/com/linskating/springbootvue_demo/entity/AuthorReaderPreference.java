@@ -3,12 +3,10 @@ package com.linskating.springbootvue_demo.entity;
 import lombok.Data;
 
 @Data
-public class TimeCapsule {
+public class AuthorReaderPreference {
     private Integer id;
+    private String reader;
     private String author;
-    private String sentence;
-    private Integer star;
-    private Integer view;
-    private Integer common;
+    private String works;
     private Boolean likeStatus;
 }
