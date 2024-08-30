@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/home")
 public class TimeCapsuleController {
 
+    private final TimeCapsuleService timeCapsuleService;
+
     @Autowired
-    TimeCapsuleService timeCapsuleService;
+    public TimeCapsuleController(TimeCapsuleService timeCapsuleService) {
+        this.timeCapsuleService = timeCapsuleService;
+    }
 
     @GetMapping("/timeTravel")
     public List<TimeCapsule> getTimeCapsuleData(@RequestParam Integer limit, @RequestParam String reader) {
@@ -23,9 +27,17 @@ public class TimeCapsuleController {
 
     @PutMapping("/timeTravel/updateLikeStatus")
     public Result updateLikeStatus(@RequestBody AuthorReaderPreference authorReaderPreference) {
-        if(timeCapsuleService.updateLikeStatus(authorReaderPreference)) {
+        if (timeCapsuleService.updateLikeStatus(authorReaderPreference)) {
             return Result.success();
         }
-        return Result.error("400","该帖子的id不存在");
+        return Result.error("400", "该帖子的id不存在");
+    }
+
+    @PutMapping("/timeTravel/updateView")
+    public Result updateViewInfo(@RequestBody TimeCapsule timeCapsule) {
+        if (timeCapsuleService.updateViewInfo(timeCapsule.getId())) {
+            return Result.success();
+        }
+        return Result.error("该帖子可能不存在");
     }
 }

@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    private final UserMapper userMapper;
+
     @Autowired
-    UserMapper userMapper;
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     public Boolean insertUser(User user) {
         User findUser = userMapper.selectByName(user.getUsername());

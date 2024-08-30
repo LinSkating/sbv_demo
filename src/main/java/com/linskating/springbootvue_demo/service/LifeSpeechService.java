@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class LifeSpeechService {
 
+    private final LifeSpeechMapper lifeSpeechMapper;
+
     @Autowired
-    LifeSpeechMapper lifeSpeechMapper;
+    public LifeSpeechService(LifeSpeechMapper lifeSpeechMapper) {
+        this.lifeSpeechMapper = lifeSpeechMapper;
+    }
 
     public List<LifeSpeech> getData(int start, int limit) {
         return lifeSpeechMapper.getData(start,limit);

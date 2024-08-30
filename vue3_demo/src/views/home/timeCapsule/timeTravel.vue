@@ -3,10 +3,13 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {ChatDotRound, Refresh, Star, StarFilled, View} from "@element-plus/icons-vue";
 import {setUsername} from "@/stores/setUsername.js";
+import {getTimeTravelDetail} from "@/stores/getTimeTravelDetail.js";
+import {useRouter} from "vue-router";
 
 const content = ref([])
 const limit = ref(6)
 const curUser = setUsername()
+
 async function fetchTimeTravelContent() {
   try {
     const response = await axios.get('http://localhost:8080/home/timeTravel', {
@@ -33,6 +36,7 @@ function getGradient(index) {
 }
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'
+
 async function handleLike(item) {
   if (item.author !== curUser.curUsername) {
     item.likeStatus = !item.likeStatus
@@ -62,17 +66,36 @@ async function handleLike(item) {
     }
   }
 }
+
+const router = useRouter()
+const curItem = getTimeTravelDetail()
+
+async function gotoDetail(item) {
+  await axios.put('http://localhost:8080/home/timeTravel/updateView',{
+    id: item.id
+  })
+  curItem.setCurItem(item)
+  await router.push('/timeTravelDetail')
+}
+
 </script>
 
 <template>
   <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 30px; ">
-    <div class="boxSize" v-for="(item,index) in content" :key="item.id" :class="getGradient(index)"
-         style="border-radius: 20px">
-      <div style="margin-left: 20px">
-        <h4>作者：{{ item.author }}</h4>
-      </div>
-      <div style="display: flex; justify-content: center">
-        <p>{{ item.sentence }}</p>
+    <div
+        class="boxSize"
+        v-for="(item,index) in content"
+        :key="item.id"
+        :class="getGradient(index)"
+        style="border-radius: 20px"
+    >
+      <div @click="gotoDetail(item)" style="cursor: pointer">
+        <div style="margin-left: 20px">
+          <h4>作者：{{ item.author }}</h4>
+        </div>
+        <div style="display: flex; justify-content: center">
+          <p>{{ item.sentence }}</p>
+        </div>
       </div>
       <div style="display: flex; justify-content: end">
         <div class="setMargin" @click="handleLike(item)">

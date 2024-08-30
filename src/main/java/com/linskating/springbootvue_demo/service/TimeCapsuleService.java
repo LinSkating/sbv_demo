@@ -12,8 +12,13 @@ import java.util.Objects;
 @Service
 public class TimeCapsuleService {
 
+    private final TimeCapsuleMapper timeCapsuleMapper;
+
     @Autowired
-    TimeCapsuleMapper timeCapsuleMapper;
+    public TimeCapsuleService(TimeCapsuleMapper timeCapsuleMapper) {
+        this.timeCapsuleMapper = timeCapsuleMapper;
+    }
+
 
     public List<TimeCapsule> getData(int limit, String reader) {
         List<TimeCapsule> limitCount = timeCapsuleMapper.getLimitCount(limit);
@@ -38,5 +43,9 @@ public class TimeCapsuleService {
             return timeCapsuleMapper.updateTimeCapsuleTB(id,1) >= 1;
         }
         return timeCapsuleMapper.updateTimeCapsuleTB(id,-1) >= 1;
+    }
+
+    public boolean updateViewInfo(int id) {
+        return timeCapsuleMapper.updateViewInfo(id) >= 1;
     }
 }

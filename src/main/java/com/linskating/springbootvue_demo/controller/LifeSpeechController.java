@@ -10,8 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/home")
 public class LifeSpeechController {
+
+    private final LifeSpeechService lifeSpeechService;
+
     @Autowired
-    LifeSpeechService lifeSpeechService;
+    public LifeSpeechController(LifeSpeechService lifeSpeechService) {
+        this.lifeSpeechService = lifeSpeechService;
+    }
 
     @GetMapping("/lifeSpeech")
     public List<LifeSpeech> getLifeSpeechData(@RequestParam int start, @RequestParam int limit) {

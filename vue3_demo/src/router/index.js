@@ -10,6 +10,7 @@ import stepTwo from '@/views/forgetPassword/step/step2.vue'
 import stepThree from '@/views/forgetPassword/step/step3.vue'
 import TimeTravel from "@/views/home/timeCapsule/timeTravel.vue";
 import DropDriftBottle from "@/views/home/timeCapsule/dropDriftBottle.vue";
+import TimeTravelDetail from "@/views/home/timeCapsule/timeTravelDetail.vue";
 
 const routes = [
     {
@@ -43,6 +44,10 @@ const routes = [
                 component: DropDriftBottle
             }
         ]
+    },
+    {
+      path: '/timeTravelDetail',
+      component: TimeTravelDetail
     },
     {
         path: '/register',

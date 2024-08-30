@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/home")
 public class DropDriftBottleController {
 
+    private final DropDriftBottleService dropDriftBottleService;
+
     @Autowired
-    DropDriftBottleService dropDriftBottleService;
+    public DropDriftBottleController(DropDriftBottleService dropDriftBottleService) {
+        this.dropDriftBottleService = dropDriftBottleService;
+    }
 
     @PostMapping("/DropDriftBottle")
     public Result setDriftBottle(@RequestBody DriftBottle driftBottle) {

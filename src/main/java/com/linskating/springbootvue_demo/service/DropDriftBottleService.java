@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class DropDriftBottleService {
 
+    private final DropDriftBottleMapper dropDriftBottleMapper;
+
     @Autowired
-    DropDriftBottleMapper dropDriftBottleMapper;
+    public DropDriftBottleService(DropDriftBottleMapper dropDriftBottleMapper) {
+        this.dropDriftBottleMapper = dropDriftBottleMapper;
+    }
 
     public boolean setDropDriftBottle(String username, String sentence) {
         return dropDriftBottleMapper.setDropDriftBottle(username,sentence) >= 1;

@@ -25,4 +25,7 @@ public interface TimeCapsuleMapper {
 
     @Select("select ifnull(likeStatus, false) from isliketable where reader = #{reader} and author = #{author} and works = #{works}")
     Boolean getLikeStatus(String reader, String author, String works);
+
+    @Update("update timecapsule set view = (view + 1) where id = #{id}")
+    int updateViewInfo(int id);
 }
